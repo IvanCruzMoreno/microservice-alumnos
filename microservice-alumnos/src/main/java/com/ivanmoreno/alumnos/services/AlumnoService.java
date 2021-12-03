@@ -1,16 +1,8 @@
 package com.ivanmoreno.alumnos.services;
 
-import java.util.Optional;
-
 import com.ivanmoreno.alumnos.models.entity.Alumno;
+import com.ivanmoreno.commons.services.CommonService;
 
-public interface AlumnoService {
+public interface AlumnoService extends CommonService<Alumno>{
 
-	public Iterable<Alumno> findAll();
-	
-	public Optional<Alumno> findById(Long id);
-	
-	public Alumno save(Alumno alumno);
-	
-	public void deleteById(Long id);
 }
