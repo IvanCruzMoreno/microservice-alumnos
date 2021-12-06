@@ -1,7 +1,10 @@
 package com.ivanmoreno.alumnos.services;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ivanmoreno.alumnos.models.repository.AlumnoRepository;
 import com.ivanmoreno.commons.models.entity.Alumno;
@@ -12,6 +15,12 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 
 	public AlumnoServiceImpl(AlumnoRepository repository) {
 		super(repository);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Alumno> findByNombreOrApellido(String value) {
+		return this.repository.findByNombreOrApellido(value);
 	}
 
 	
