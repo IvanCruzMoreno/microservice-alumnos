@@ -3,8 +3,11 @@ package com.ivanmoreno.alumnos.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,7 +22,12 @@ import com.ivanmoreno.commons.models.entity.Alumno;
 public class AlumnoController extends CommonController<Alumno, AlumnoService>{
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> edit(@RequestBody Alumno alumno, @PathVariable Long id) {
+	public ResponseEntity<?> edit(@Valid @RequestBody Alumno alumno, BindingResult result, @PathVariable Long id) {
+		
+		if(result.hasErrors()) {
+			return this.validar(result);
+		}
+		
 		Optional<Alumno> alumnoOpt = this.service.findById(id);
 		
 		if(!alumnoOpt.isPresent()) {
