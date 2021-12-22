@@ -28,6 +28,11 @@ import com.ivanmoreno.commons.models.entity.Alumno;
 @RestController
 public class AlumnoController extends CommonController<Alumno, AlumnoService>{
 	
+	@GetMapping("/alumnos-por-ids")
+	public ResponseEntity<?> obtenerAlumnosPorIds(@RequestParam List<Long> ids) {
+		return ResponseEntity.ok(this.service.findAllById(ids));
+	}
+	
 	@PutMapping("/{id}")
 	public ResponseEntity<?> edit(@Valid @RequestBody Alumno alumno, BindingResult result, @PathVariable Long id) {
 		

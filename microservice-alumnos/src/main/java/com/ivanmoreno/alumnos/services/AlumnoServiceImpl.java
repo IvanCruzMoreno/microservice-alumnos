@@ -23,6 +23,12 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 		return this.repository.findByNombreOrApellido(value);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Alumno> findAllById(List<Long> ids) {
+		return (List<Alumno>) this.repository.findAllById(ids);
+	}
+
 	
 
 }
